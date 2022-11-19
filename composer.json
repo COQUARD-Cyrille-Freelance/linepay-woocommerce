@@ -1,0 +1,76 @@
+{
+  "name": "mitango/linepay-woocommerce",
+  "require": {
+
+  },
+  "require-dev": {
+    "php": ">=7",
+    "coenjacobs/mozart": "^0.7.1",
+    "league/container": "^4.2",
+    "brain/monkey": "^2.6",
+    "wp-media/phpunit": "^3.0",
+    "wp-coding-standards/wpcs": "^2.3",
+    "wpackagist-plugin/woocommerce": "^5.3",
+    "monolog/monolog": "^1.0 || ^2.0",
+    "mitango/linepay-sdk" : "v1.0.0"
+  },
+  "extra": {
+    "installer-paths": {
+      "vendor/{$vendor}/{$name}/": ["type:wordpress-plugin"]
+    },
+    "mozart": {
+      "dep_namespace": "Mitango\\LinepayWoocommerce\\Dependencies\\",
+      "dep_directory": "/inc/Dependencies/",
+      "classmap_directory": "/inc/classes/dependencies/",
+      "classmap_prefix": "Mitango_LinepayWoocommerce",
+      "packages": [
+        "league/container",
+        "mitango/linepay-sdk",
+        "monolog/monolog"
+      ]
+    }
+  },
+  "scripts": {
+    "post-install-cmd": [
+      "\"vendor/bin/mozart\" compose",
+      "composer dump-autoload"
+    ],
+    "post-update-cmd": [
+      "\"vendor/bin/mozart\" compose",
+      "composer dump-autoload"
+    ]
+  },
+  "autoload": {
+    "psr-4": {
+      "Mitango\\LinepayWoocommerce\\": "inc/"
+    },
+    "classmap": [
+      "inc/classes"
+    ],
+    "exclude-from-classmap": []
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Mitango\\LinepayWoocommerce\\Tests\\": "tests/"
+    }
+  },
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://wpackagist.org"
+    },
+    {
+      "type": "vcs",
+      "url": "https://github.com/COQUARD-Cyrille-Freelance/linepay"
+    }
+  ],
+  "config": {
+    "preferred-install": "dist",
+    "prepend-autoloader": false,
+    "allow-plugins": {
+      "dealerdirect/phpcodesniffer-composer-installer": true,
+      "composer/installers": true,
+      "mnsami/composer-custom-directory-installer": true
+    }
+  }
+}
